@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //route navigasi dalam applikasi
 import propTypes from "prop-types";
 
 export default function Button(props) {
@@ -35,17 +35,19 @@ export default function Button(props) {
     );
   }
 
-  // ketersediaan link external
+  // Jika menerima type 'link', maka akan menjalankan perintah true [isExternal(New Tab/_blank) / <Link>(Link Router from react)].
+  // Jika menerima props 'isExternal', maka jalankan tag <a> beserta childrennya. Jika tidak, jalankan <Link> dari Router ke dalam aplikasi beserta childrennya
   if (props.type === "link") {
-    // atrb isExternal (new tab) akan menampilkan tag <a>, diluar itu akan menampilan <Link>
     if (props.isExternal) {
       return (
         <a
           href={props.href}
           className={className.join(" ")}
           style={props.target}
-          target={props.target === "_blank" ? "_blank" : undefined} // jika targetnya adalah halaman baru, maka tampilkan halaman baru
-          rel={props.target === "_blank" ? "noopener noreferrer" : undefined} // rel=relasi antara current web dan link web. noopener & noreferrer ada kaitannya dengan SEO
+          // jika target menrima props '_blank', maka akan menjalankan IF STATEMENT untuk menulis "_blank"(True) atau "undefined"(False).
+          target={props.target === "_blank" ? "_blank" : undefined}
+          // Jika ada target "_blank", HARUS tulis juga rel. rel=relasi/hubungan antara current web dan link web. noopener & noreferrer ada kaitannya dengan SEO
+          rel={props.target === "_blank" ? "noopener noreferrer" : undefined}
         >
           {props.children}
         </a>
@@ -53,8 +55,7 @@ export default function Button(props) {
     } else {
       return (
         <Link
-          to="/"
-          href={props.href}
+          to={props.href} // kalo di tag <a> itu 'href', kalo di <Link> itu pakai 'to'
           className={className.join(" ")}
           style={props.style}
           onClick={onClick} // memanggil function onClik
@@ -89,6 +90,6 @@ Button.propTypes = {
   className: propTypes.string,
   target: propTypes.string, // link eksternal
   href: propTypes.string,
-  type: propTypes.oneOf(["button", "link"]), // hanya menerima property button dan link
+  type: propTypes.oneOf(["button", "link"]), // ENUM. hanya menerima property button dan link. mengambil satu dari sekumpulan nilai yg dimiliki (button or link)
   isExternal: propTypes.bool,
 };
