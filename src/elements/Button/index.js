@@ -53,6 +53,7 @@ export default function Button(props) {
     } else {
       return (
         <Link
+          to="/"
           href={props.href}
           className={className.join(" ")}
           style={props.style}
