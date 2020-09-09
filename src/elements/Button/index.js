@@ -92,4 +92,5 @@ Button.propTypes = {
   href: propTypes.string,
   type: propTypes.oneOf(["button", "link"]), // ENUM. hanya menerima property button dan link. mengambil satu dari sekumpulan nilai yg dimiliki (button or link)
   isExternal: propTypes.bool,
+  isPrimary: propTypes.bool,
 };
